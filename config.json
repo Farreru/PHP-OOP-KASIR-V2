@@ -1,0 +1,9 @@
+{
+  "APP_FOLDER": "new_ukk_web",
+  "BASE_URL": "http://localhost/new_ukk_web",
+  "DB_HOSTNAME": "localhost",
+  "DB_PORT": "3306",
+  "DB_USERNAME": "root",
+  "DB_PASSWORD": "",
+  "DB_DATABASE": "db_kasir_adit"
+}
