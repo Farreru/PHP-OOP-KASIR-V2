@@ -56,7 +56,7 @@ $dashboard = new Dashboard();
                 <div class="card-body">
                     <div class="row g-1">
                         Total Penjualan (Hari ini)
-                        <h3> 0 </h3>
+                        <h3> <?= $dashboard->JumlahTotalPenjualanHariIni() ?> </h3>
                         <button class="btn btn-outline-primary btn-sm">Selengkapnya</button>
                     </div>
                 </div>

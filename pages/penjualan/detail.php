@@ -100,7 +100,7 @@ $penjualan = new Penjualan();
                     <input type="number" class="form-control" placeholder="Jumlah" name="jumlah[]" min="0">
                     <input type="number" class="form-control" value="0" name="subtotal[]" readonly>
                     <button id="button-proses-harga" data-id="<?= $value['id'] ?>" class="btn btn-warning">Proses</button>
-                    <button class="btn btn-danger">Hapus</button>
+                    <button id="button-hapus-input" class="btn btn-danger" disabled>Hapus</button>
                 </div>
             </div>
             <div>
@@ -183,7 +183,7 @@ require('../layout/footer.php');
                     <input type="number" class="form-control" name="jumlah[]" min="0">
                     <input type="number" class="form-control" value="0" name="subtotal[]" readonly>
                         <button id="button-proses-harga" data-id="<?= $value['id'] ?>" class="btn btn-warning">Proses</button>
-                        <button class="btn btn-danger">Hapus</button>
+                        <button id="button-hapus-input" class="btn btn-danger">Hapus</button>
                 </div>
         `);
     });
@@ -220,9 +220,25 @@ require('../layout/footer.php');
             return alert('Stok produk tidak cukup, silahkan ubah jumlah produk.');
         }
 
-        currentSubtotal.val((stok * harga));
+        console.log('harga : ' + harga);
+
+        currentSubtotal.val((jumlah * harga));
 
     });
+
+    $('body').on('click', '#button-hapus-input', function(e) {
+        e.preventDefault();
+
+        var currentRow = $(this).closest('.d-flex');
+        var totalRows = $('.d-flex').length;
+
+        if (totalRows > 1) {
+            currentRow.remove();
+        } else {
+            return false;
+        }
+    });
+
 
     function updateTotalHarga() {
         var totalHarga = 0;

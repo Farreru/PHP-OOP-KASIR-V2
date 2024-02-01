@@ -82,7 +82,7 @@ class Penjualan
             try {
                 $this->db->query($sql, [$id_penjualan, $value, $jumlah[$index], $subtotal[$index]]);
             } catch (\PDOException $e) {
-                $status = false;
+                $status = $e;
                 break;
             }
         }
@@ -116,5 +116,63 @@ class Penjualan
         }
 
         return false;
+    }
+
+    public function simpan($id_pelanggan, $tanggal, $totalharga = 0)
+    {
+        $sql = "INSERT INTO penjualan (id_pelanggan, tanggal, total_harga) VALUES (?, ?, ?)";
+        $result = $this->db->query($sql, [$id_pelanggan, $tanggal, $totalharga]);
+
+        if ($result) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function hapus($id)
+    {
+        try {
+            $getDetail = $this->db->query("SELECT * FROM detail_penjualan WHERE id_penjualan LIKE ?", [$id]);
+
+            $rowsDetail = [];
+            $produkIds = [];
+            $jumlahs = [];
+
+            while ($row = $getDetail->fetch(2)) {
+                $rowsDetail[] = $row;
+                $produkIds[] = $row['id_produk'];
+                $jumlahs[] = $row['jumlah'];
+            }
+
+            $deleteDetail = $this->db->query("DELETE FROM detail_penjualan WHERE id_penjualan LIKE ?", [$id]);
+
+            if (!$deleteDetail) {
+                return false;
+            }
+
+            foreach ($produkIds as $index => $produkId) {
+                $getProdukDetail = $this->db->query("SELECT * FROM produk WHERE id LIKE ?", [$produkId], true);
+                $getCurrentProdukStok = $getProdukDetail['stok'];
+
+                $newStok = $getCurrentProdukStok + $jumlahs[$index];
+
+                $updateStok = $this->db->query("UPDATE produk SET stok = ? WHERE id LIKE ?", [$newStok, $produkId]);
+
+                if (!$updateStok) {
+                    return false;
+                }
+            }
+
+            $deletePenjualan = $this->db->query("DELETE FROM penjualan WHERE id LIKE ?", [$id]);
+
+            if ($deletePenjualan) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            return false;
+        }
     }
 }

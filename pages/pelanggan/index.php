@@ -85,8 +85,7 @@ $pelanggan = new Pelanggan();
                     <?php endif; ?>
 
                     <?php foreach ($pelanggan->data() as $index => $value) : ?>
-                        <tr id="tr-
-                        <?= $value['id'] ?>">
+                        <tr id="tr-<?= $value['id'] ?>">
                             <td><?= ($index + 1) ?></td>
                             <td><?= $value['nama'] ?></td>
                             <td><?= $value['alamat'] ?></td>

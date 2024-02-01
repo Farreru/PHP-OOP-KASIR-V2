@@ -30,4 +30,10 @@ class Dashboard
     {
         return $this->db->count('pelanggan');
     }
+
+    public function JumlahTotalPenjualanHariIni()
+    {
+        $hari_ini = date("Y-m-d");
+        return $this->db->count('penjualan', "DATE(tanggal) = '$hari_ini'");
+    }
 }

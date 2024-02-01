@@ -70,7 +70,7 @@ $penjualan = new Penjualan();
 
     <div class="py-2">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table" id="table">
                 <thead>
                     <tr>
                         <th>No.</th>
@@ -116,11 +116,10 @@ $penjualan = new Penjualan();
 
 <?php
 if (isset($_POST['simpan'])) {
-    $nama = $_POST['nama'];
-    $harga = $_POST['harga'];
-    $stok = $_POST['stok'];
+    $pelanggan = $_POST['pelanggan'];
+    $tanggal = $_POST['tanggal'];
 
-    $result = $produk->tambah($nama, $harga, $stok);
+    $result = $penjualan->simpan($pelanggan, $tanggal, 0);
     if ($result) {
         unset($_POST);
         echo "<script> window.location.href = '?pesan=berhasil' </script>";
@@ -133,7 +132,7 @@ if (isset($_POST['simpan'])) {
 if (isset($_POST['hapus'])) {
     $id = $_POST['hapus'];
 
-    $result = $produk->hapus($id);
+    $result = $penjualan->hapus($id);
 
     if ($result === "ERROR:CANT_DELETE") {
         unset($_POST);
@@ -150,5 +149,7 @@ require('../layout/footer.php');
 ?>
 
 <script>
-    var table = new DataTable('.table');
+    $(document).ready(function() {
+        $(".table").DataTable();
+    });
 </script>
