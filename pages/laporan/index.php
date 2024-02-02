@@ -21,7 +21,8 @@ $laporan = new Laporan();
                     <option value=""></option>
                     <?php
                     for ($i = 1; $i <= 31; $i++) {
-                        echo "<option value='$i'>$i</option>";
+                        $selected = ($_SESSION['laporan_tanggal'] == $i) ? 'selected' : '';
+                        echo "<option value='$i' $selected>$i</option>";
                     }
                     ?>
                 </select>
@@ -38,7 +39,7 @@ $laporan = new Laporan();
                     ];
 
                     foreach ($months as $key => $value) {
-                        echo "<option value='" . ($key + 1) . "'>$value</option>";
+                        echo "<option " . ($_SESSION['laporan_bulan'] == $key + 1 ? 'selected' : '') . " value='" . ($key + 1) . "'>$value</option>";
                     }
                     ?>
                 </select>
@@ -50,7 +51,8 @@ $laporan = new Laporan();
                     <?php
                     $currentYear = date("Y");
                     for ($i = $currentYear; $i >= $currentYear - 10; $i--) {
-                        echo "<option value='$i'>$i</option>";
+                        $selected = ($_SESSION['laporan_tahun'] == $i) ? 'selected' : '';
+                        echo "<option value='$i' $selected>$i</option>";
                     }
                     ?>
                 </select>
@@ -102,6 +104,10 @@ if (isset($_POST['ganti_tanggal'])) {
     $tahun = $_POST['tahun'];
     $bulan = $_POST['bulan'];
     $tanggal = $_POST['tanggal'];
+
+    $_SESSION['laporan_tanggal'] = $tanggal;
+    $_SESSION['laporan_bulan'] = $bulan;
+    $_SESSION['laporan_tahun'] = $tahun;
 
     if (empty($tahun) || empty($bulan) || empty($tanggal)) {
         echo "<script> alert('Mohon diisi semua field!.'); </script>";
