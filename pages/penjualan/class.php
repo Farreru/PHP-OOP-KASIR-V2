@@ -77,22 +77,36 @@ class Penjualan
     public function simpanDataDetail($id_penjualan, $totalharga, $produk = [], $jumlah = [], $subtotal = [])
     {
         $status = true;
+
         foreach ($produk as $index => $value) {
-            $sql = "INSERT INTO detail_penjualan (id_penjualan, id_produk, jumlah, sub_total) VALUES (?, ?, ?, ?)";
-            try {
-                $this->db->query($sql, [$id_penjualan, $value, $jumlah[$index], $subtotal[$index]]);
-            } catch (\PDOException $e) {
-                $status = $e;
+            $productData = $this->db->query("SELECT * FROM produk WHERE id = ?", [$value], true);
+
+            if ($productData) {
+                $newStock = $productData['stok'] - $jumlah[$index];
+
+                $this->db->query("UPDATE produk SET stok = ? WHERE id = ?", [$newStock, $value]);
+
+                $sql = "INSERT INTO detail_penjualan (id_penjualan, id_produk, jumlah, sub_total) VALUES (?, ?, ?, ?)";
+
+                try {
+                    $this->db->query($sql, [$id_penjualan, $value, $jumlah[$index], $subtotal[$index]]);
+                } catch (\PDOException $e) {
+                    $status = $e;
+                    break;
+                }
+            } else {
+                $status = false;
                 break;
             }
         }
 
         if ($status) {
-            $this->db->query("UPDATE penjualan SET total_harga = ? WHERE id LIKE ?", [$totalharga, $id_penjualan]);
+            $this->db->query("UPDATE penjualan SET total_harga = ? WHERE id = ?", [$totalharga, $id_penjualan]);
         }
 
         return $status;
     }
+
 
     public function hapusProdukDetail($id)
     {
