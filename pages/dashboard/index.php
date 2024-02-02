@@ -57,7 +57,7 @@ $dashboard = new Dashboard();
                     <div class="row g-1">
                         Total Penjualan (Hari ini)
                         <h3> <?= $dashboard->JumlahTotalPenjualanHariIni() ?> </h3>
-                        <button class="btn btn-outline-primary btn-sm">Selengkapnya</button>
+                        <a href="<?= $route->getBaseURL() ?>/pages/laporan" class="btn btn-outline-primary btn-sm">Selengkapnya</a>
                     </div>
                 </div>
             </div>
