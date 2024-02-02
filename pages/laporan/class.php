@@ -27,9 +27,13 @@ class Laporan
         return false;
     }
 
-    public function dataPerTanggal($tanggal)
+    public function dataPerTanggal($tanggal = "")
     {
-        $query = $this->db->query("SELECT * FROM penjualan WHERE DATE(tanggal) = ?", [$tanggal]);
+        if ($tanggal == "") {
+            $query = $this->db->query("SELECT * FROM penjualan", []);
+        } else {
+            $query = $this->db->query("SELECT * FROM penjualan WHERE DATE(tanggal) = ?", [$tanggal]);
+        }
 
         $rows = [];
 

@@ -8,7 +8,9 @@ $laporan = new Laporan();
     <h1>Laporan</h1>
 
     <div class="d-flex justify-content-end align-items-center">
-        <button class="btn btn-success">Cetak</button>
+        <form action="" method="post">
+            <button tyoe="submit" name="cetak" class="btn btn-success">Cetak</button>
+        </form>
     </div>
 
     <form action="" method="post">
@@ -106,6 +108,14 @@ if (isset($_POST['ganti_tanggal'])) {
     } else {
         echo "<script> window.location.href = '?tanggal=" . $tahun . '-' . $bulan . '-' . $tanggal . "' </script>";
         exit;
+    }
+}
+
+if (isset($_POST['cetak'])) {
+    if (isset($_GET['tanggal'])) {
+        echo "<script> window.location.href = 'cetak.php?tanggal=" . $_GET['tanggal'] . "' </script>";
+    } else {
+        echo "<script> window.location.href = 'cetak.php' </script>";
     }
 }
 

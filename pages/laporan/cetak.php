@@ -28,10 +28,10 @@ $laporan = new Laporan();
                 </tr>
             </thead>
             <tbody id="laporan-list">
-                <?php foreach ($db->select('penjualan', '*', '', '', '', 'tanggal', 'DESC') as $index => $value) : ?>
+                <?php foreach ($laporan->dataPerTanggal((isset($_GET['tanggal'])) ? $_GET['tanggal'] : "") as $index => $value) : ?>
                     <tr>
                         <td><?= ($index + 1) ?></td>
-                        <td>KSRID/<?= $value['id'] ?></td>
+                        <td>KSR-<?= $value['id'] ?></td>
                         <td><?= $value['tanggal'] ?></td>
                         <td data-harga-total-transaksi="<?= $value['total_harga'] ?>"><?= 'Rp ' . number_format($value['total_harga'], 0, ',', '.'); ?></td>
                     </tr>
