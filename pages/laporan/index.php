@@ -2,6 +2,13 @@
 require('../layout/header.php');
 require('class.php');
 $laporan = new Laporan();
+
+if (!isset($_GET['tanggal'])) {
+    unset($_SESSION['laporan_tanggal']);
+    unset($_SESSION['laporan_bulan']);
+    unset($_SESSION['laporan_tahun']);
+    echo "<script> window.location.reload() </script>";
+}
 ?>
 
 <div id="content">
