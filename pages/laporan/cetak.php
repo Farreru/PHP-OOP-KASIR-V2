@@ -41,6 +41,7 @@ $laporan = new Laporan();
                     <td class="fw-bold">TOTAL</td>
                     <td></td>
                     <td></td>
+                    <td></td>
                     <td class="fw-bold" id="total-laporan-text">Rp.</td>
                 </tr>
             </tbody>
