@@ -22,6 +22,7 @@ $laporan = new Laporan();
                 <tr>
                     <th>NO.</th>
                     <th>ID TRANSAKSI</th>
+                    <th>PELANGGAN</th>
                     <th>TANGGAL DAN WAKTU</th>
                     <th>BIAYA</th>
                 </tr>
@@ -31,6 +32,7 @@ $laporan = new Laporan();
                     <tr>
                         <td><?= ($index + 1) ?></td>
                         <td>KSR-<?= $value['id'] ?></td>
+                        <td><?= $value['nama_pelanggan'] ?></td>
                         <td><?= $value['tanggal'] ?></td>
                         <td data-harga-total-transaksi="<?= $value['total_harga'] ?>"><?= 'Rp ' . number_format($value['total_harga'], 0, ',', '.'); ?></td>
                     </tr>
