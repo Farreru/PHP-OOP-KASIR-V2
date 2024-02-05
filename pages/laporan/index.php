@@ -3,7 +3,7 @@ require('../layout/header.php');
 require('class.php');
 $laporan = new Laporan();
 
-if (!isset($_GET['tanggal'])) {
+if (!isset($_GET['tanggal']) && isset($_SESSION['laporan_tanggal'])) {
     unset($_SESSION['laporan_tanggal']);
     unset($_SESSION['laporan_bulan']);
     unset($_SESSION['laporan_tahun']);
