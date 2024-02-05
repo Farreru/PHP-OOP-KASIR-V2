@@ -15,7 +15,7 @@ $laporan = new Laporan();
 
 <body>
 
-    <div class="container mt-4">
+    <div class=" mt-4">
         <h1 class="text-center p-4">Laporan Penjualan Kasir</h1>
         <table id="data-table" class="table table-bordered">
             <thead>
