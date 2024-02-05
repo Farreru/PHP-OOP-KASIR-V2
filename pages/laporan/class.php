@@ -12,7 +12,7 @@ class Laporan
 
     public function data()
     {
-        $query = $this->db->query("SELECT * FROM penjualan", []);
+        $query = $this->db->query("SELECT penjualan.*, pelanggan.nama AS nama_pelanggan FROM penjualan JOIN pelanggan ON pelanggan.id = penjualan.id_pelanggan;", []);
 
         $rows = [];
 
@@ -30,9 +30,9 @@ class Laporan
     public function dataPerTanggal($tanggal = "")
     {
         if ($tanggal == "") {
-            $query = $this->db->query("SELECT * FROM penjualan", []);
+            $query = $this->db->query("SELECT penjualan.*, pelanggan.nama AS nama_pelanggan FROM penjualan JOIN pelanggan ON pelanggan.id = penjualan.id_pelanggan;", []);
         } else {
-            $query = $this->db->query("SELECT * FROM penjualan WHERE DATE(tanggal) = ?", [$tanggal]);
+            $query = $this->db->query("SELECT penjualan.*, pelanggan.nama AS nama_pelanggan FROM penjualan JOIN pelanggan ON pelanggan.id = penjualan.id_pelanggan; WHERE DATE(tanggal) = ?", [$tanggal]);
         }
 
         $rows = [];

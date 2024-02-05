@@ -76,6 +76,7 @@ if (!isset($_GET['tanggal']) && isset($_SESSION['laporan_tanggal']) || isset($_S
                 <tr>
                     <th>No.</th>
                     <th>ID Transaksi</th>
+                    <th>Pelanggan</th>
                     <th>Tanggal</th>
                     <Th>Total Bayar</Th>
                 </tr>
@@ -86,6 +87,7 @@ if (!isset($_GET['tanggal']) && isset($_SESSION['laporan_tanggal']) || isset($_S
                         <tr>
                             <td><?= $index + 1  ?></td>
                             <td>KSR-<?= $value['id'] ?></td>
+                            <td><?= $value['nama_pelanggan'] ?></td>
                             <td><?= $value['tanggal'] ?></td>
                             <td>Rp. <?= $value['total_harga'] ?></td>
                         </tr>
@@ -95,6 +97,7 @@ if (!isset($_GET['tanggal']) && isset($_SESSION['laporan_tanggal']) || isset($_S
                         <tr>
                             <td><?= $index + 1  ?></td>
                             <td>KSR-<?= $value['id'] ?></td>
+                            <td><?= $value['nama_pelanggan'] ?></td>
                             <td><?= $value['tanggal'] ?></td>
                             <td>Rp. <?= $value['total_harga'] ?></td>
                         </tr>
