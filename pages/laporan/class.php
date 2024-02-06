@@ -32,7 +32,7 @@ class Laporan
         if ($tanggal == "") {
             $query = $this->db->query("SELECT penjualan.*, pelanggan.nama AS nama_pelanggan FROM penjualan JOIN pelanggan ON pelanggan.id = penjualan.id_pelanggan;", []);
         } else {
-            $query = $this->db->query("SELECT penjualan.*, pelanggan.nama AS nama_pelanggan FROM penjualan JOIN pelanggan ON pelanggan.id = penjualan.id_pelanggan; WHERE DATE(tanggal) = ?", [$tanggal]);
+            $query = $this->db->query("SELECT penjualan.*, pelanggan.nama AS nama_pelanggan FROM penjualan JOIN pelanggan ON pelanggan.id = penjualan.id_pelanggan WHERE DATE(tanggal) = ?", [$tanggal]);
         }
 
         $rows = [];

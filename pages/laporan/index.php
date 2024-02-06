@@ -3,12 +3,10 @@ require('../layout/header.php');
 require('class.php');
 $laporan = new Laporan();
 
-if (!isset($_GET['tanggal']) && isset($_SESSION['laporan_tanggal']) || isset($_SESSION['laporan_bulan']) || isset($_SESSION['laporan_tahun'])) {
-    unset($_SESSION['laporan_tanggal']);
-    unset($_SESSION['laporan_bulan']);
-    unset($_SESSION['laporan_tahun']);
-    echo "<script> window.location.reload() </script>";
-}
+// if (!isset($_GET['tanggal']) && isset($_SESSION['laporan_tanggal'])) {
+//     unset($_SESSION['laporan_tanggal']);
+//     echo "<script> window.location.reload() </script>";
+// }
 ?>
 
 <div id="content">
@@ -22,48 +20,12 @@ if (!isset($_GET['tanggal']) && isset($_SESSION['laporan_tanggal']) || isset($_S
 
     <form action="" method="post">
         <div class="d-flex gap-1 justify-content-start align-items-center">
-            <div class="form-group">
-                <label for="day">Tanggal</label>
-                <select name="tanggal" class="form-select" id="day">
-                    <option value=""></option>
-                    <?php
-                    for ($i = 1; $i <= 31; $i++) {
-                        $selected = ($_SESSION['laporan_tanggal'] == $i) ? 'selected' : '';
-                        echo "<option value='$i' $selected>$i</option>";
-                    }
-                    ?>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="month">Bulan</label>
-                <select name="bulan" class="form-select" id="month">
-                    <option value=""></option>
-                    <?php
-                    $months = [
-                        "January", "February", "March", "April",
-                        "May", "June", "July", "August",
-                        "September", "October", "November", "December"
-                    ];
 
-                    foreach ($months as $key => $value) {
-                        echo "<option " . ($_SESSION['laporan_bulan'] == $key + 1 ? 'selected' : '') . " value='" . ($key + 1) . "'>$value</option>";
-                    }
-                    ?>
-                </select>
-            </div>
             <div class="form-group">
-                <label for="year">Tahun</label>
-                <select name="tahun" class="form-select" id="year">
-                    <option value=""></option>
-                    <?php
-                    $currentYear = date("Y");
-                    for ($i = $currentYear; $i >= $currentYear - 10; $i--) {
-                        $selected = ($_SESSION['laporan_tahun'] == $i) ? 'selected' : '';
-                        echo "<option value='$i' $selected>$i</option>";
-                    }
-                    ?>
-                </select>
+                <label for="tanggal">Tanggal</label>
+                <input type="date" value="<?= (isset($_GET['tanggal']) ? $_GET['tanggal'] : '') ?>" name="tanggal" id="" class="form-control">
             </div>
+
             <div class="form-group">
                 <button type="submit" name="ganti_tanggal" class="btn btn-primary mt-4">Ganti</button>
             </div>
@@ -111,18 +73,13 @@ if (!isset($_GET['tanggal']) && isset($_SESSION['laporan_tanggal']) || isset($_S
 
 <?php
 if (isset($_POST['ganti_tanggal'])) {
-    $tahun = $_POST['tahun'];
-    $bulan = $_POST['bulan'];
     $tanggal = $_POST['tanggal'];
-
     $_SESSION['laporan_tanggal'] = $tanggal;
-    $_SESSION['laporan_bulan'] = $bulan;
-    $_SESSION['laporan_tahun'] = $tahun;
 
-    if (empty($tahun) || empty($bulan) || empty($tanggal)) {
-        echo "<script> alert('Mohon diisi semua field!.'); </script>";
+    if (isset($tanggal) && empty($tanggal)) {
+        echo "<script> window.location.href= '?'; </script>";
     } else {
-        echo "<script> window.location.href = '?tanggal=" . $tahun . '-' . $bulan . '-' . $tanggal . "' </script>";
+        echo "<script> window.location.href = '?tanggal=" . $tanggal . "' </script>";
         exit;
     }
 }
