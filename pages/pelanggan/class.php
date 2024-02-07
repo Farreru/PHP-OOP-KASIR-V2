@@ -38,6 +38,10 @@ class Pelanggan
         return false;
     }
 
+    public function lain()
+    {
+    }
+
     public function hapus($id)
     {
         try {
