@@ -40,11 +40,11 @@ if (isset($_SESSION['user'])) {
                     <form action="proses.php" method="post">
                         <div class="form-group mb-2">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control">
+                            <input type="email" name="email" required id="email" class="form-control">
                         </div>
                         <div class="form-group mb-2">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control">
+                            <input type="password" name="password" required id="password" class="form-control">
                         </div>
                         <div class="d-flex justify-content-between align-items-center">
                             <a href="../register">Belum punya akun.</a>

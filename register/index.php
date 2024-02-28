@@ -40,27 +40,27 @@ if (isset($_SESSION['user'])) {
                     <form action="proses.php" method="post">
                         <div class="form-group mb-2">
                             <label for="nama">Nama</label>
-                            <input type="text" name="nama" id="nama" class="form-control">
+                            <input type="text" name="nama" required id="nama" class="form-control">
                         </div>
                         <div class="form-group mb-2">
                             <label for="username">Username</label>
-                            <input type="text" name="username" id="username" class="form-control">
+                            <input type="text" name="username" required id="username" class="form-control">
                         </div>
                         <div class="form-group mb-2">
                             <label for="email">Email</label>
-                            <input type="email" name="email" id="email" class="form-control">
+                            <input type="email" name="email" required id="email" class="form-control">
                         </div>
                         <div class="form-group mb-2">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" class="form-control">
+                            <input type="password" name="password" required id="password" class="form-control">
                         </div>
                         <div class="form-group mb-2">
                             <label for="alamat">Alamat</label>
-                            <textarea name="alamat" class="form-control"></textarea>
+                            <textarea name="alamat" required class="form-control"></textarea>
                         </div>
                         <div class="form-group mb-2">
                             <label for="tipe_pengguna">Tipe Pengguna</label>
-                            <select name="tipe_pengguna" id="tipe_pengguna" class="form-select">
+                            <select name="tipe_pengguna" required id="tipe_pengguna" class="form-select">
                                 <option value=""></option>
                                 <option value="admin">Admin</option>
                                 <option value="petugas">Petugas</option>
